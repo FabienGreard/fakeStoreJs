@@ -1,14 +1,54 @@
 {
-  "name": "FakeStoreJs",
+  "name": "fakestorejs",
   "version": "0.0.1",
   "description": "FakeStoreJs is a javascript library, quickly create a CRUD acess to any object",
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
-    "dev": "nodemon index.js"
+    "dev": "nodemon index.js",
+    "test": "jest",
+    "coverage": "jest --coverage --watchAll",
+    "prettier": "prettier --single-quote --write **/*.{js,json,css,md}",
+    "publish": "npm publish ./"
+  },
+  "prettier": {
+    "printWidth": 80,
+    "tabWidth": 2,
+    "useTabs": false,
+    "semi": true,
+    "singleQuote": true,
+    "trailingComma": "none",
+    "bracketSpacing": true,
+    "jsxBracketSameLine": false,
+    "fluid": false
+  },
+  "jest": {
+    "testEnvironment": "node",
+    "verbose": true,
+    "bail": true,
+    "testMatch": ["**/test/*.test.js?(x)"],
+    "testPathIgnorePatterns": ["node_modules/"],
+    "collectCoverageFrom": ["lib/*.js", "!lib/index.js"],
+    "coverageThreshold": {
+      "global": {
+        "branches": 80,
+        "functions": 80,
+        "lines": 80,
+        "statements": -10
+      }
+    }
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run prettier"
+    }
   },
   "dependencies": {},
   "devDependencies": {
-    "nodemon": "1.18.4"
-  }
+    "jest": "23.6.0",
+    "prettier": "1.15.2",
+    "nodemon": "1.18.4",
+    "husk": "0.5.3"
+  },
+  "keywords": ["store", "fake", "api", "mock", "javascript"]
 }
