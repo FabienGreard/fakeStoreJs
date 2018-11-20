@@ -1,0 +1,14 @@
+{
+  "name": "FakeStoreJs",
+  "version": "0.0.1",
+  "description": "FakeStoreJs is a javascript library, quickly create a CRUD acess to any object",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon index.js"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "nodemon": "1.18.4"
+  }
+}
