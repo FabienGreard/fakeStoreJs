@@ -1,4 +1,4 @@
-# fakeStoreJs :construction: [![Build Status](https://travis-ci.org/FabienGreard/fakeStoreJs.svg?branch=master)](https://travis-ci.org/FabienGreard/fakeStoreJs)[dependencies Status](https://david-dm.org/FabienGreard/fakeStoreJs/status.svg)](https://david-dm.org/FabienGreard/fakeStoreJs)[![devDependencies Status](https://david-dm.org/FabienGreard/fakeStoreJs/dev-status.svg)](https://david-dm.org/FabienGreard/fakeStoreJs?type=dev)
+# fakeStoreJs :construction: [![Build Status](https://travis-ci.org/FabienGreard/fakeStoreJs.svg?branch=master)](https://travis-ci.org/FabienGreard/fakeStoreJs)[![dependencies Status](https://david-dm.org/FabienGreard/fakeStoreJs/status.svg)](https://david-dm.org/FabienGreard/fakeStoreJs)[![devDependencies Status](https://david-dm.org/FabienGreard/fakeStoreJs/dev-status.svg)](https://david-dm.org/FabienGreard/fakeStoreJs?type=dev)
 
 FakeStoreJs is a javascript library, quickly create a CRUD acess to any object
 
@@ -17,7 +17,7 @@ npm install fakeStoreJs
 Start using your store, by importing `createStore` from fakeStoreJs.
 
 ```javascript
-const createStore = require("fakeStoreJs");
+const createStore = require('fakeStoreJs');
 ```
 
 Create a store from any object.
@@ -26,10 +26,10 @@ Create a store from any object.
 const store = createStore({
   book: {
     data: [
-      { author: "Speaking JavaScript", title: "Dr. Axel Raushmayer" },
-      { author: "Effective JavaScript", title: "David Herman" },
-      { author: "Eloquent Javascript", title: "Marijin Haverbeke" },
-      { author: "You-Dont-Know-JS", title: "Kyle Simpson" }
+      { author: 'Speaking JavaScript', title: 'Dr. Axel Raushmayer' },
+      { author: 'Effective JavaScript', title: 'David Herman' },
+      { author: 'Eloquent Javascript', title: 'Marijin Haverbeke' },
+      { author: 'You-Dont-Know-JS', title: 'Kyle Simpson' }
     ],
     constructor: function Book({ author, title }) {
       this.author = author;

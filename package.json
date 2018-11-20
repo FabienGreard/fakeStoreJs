@@ -3,6 +3,11 @@
   "version": "0.0.1",
   "description": "FakeStoreJs is a javascript library, quickly create a CRUD acess to any object",
   "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/FabienGreard/fakeStoreJs.git"
+  },
+  "homepage": "https://github.com/FabienGreard/fakeStoreJs",
   "scripts": {
     "start": "node index.js",
     "dev": "nodemon index.js",
