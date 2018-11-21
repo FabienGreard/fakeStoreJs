@@ -19,18 +19,10 @@ describe('createStore', () => {
     // Store with mock
     expect(store).toHaveProperty('book');
   });
-  it('Should create a store without a mock', () => {
-    const store = createStore({
-      book: {
-        data: [],
-        constructor: function Book({ author, title }) {
-          this.author = author;
-          this.title = title;
-        }
-      }
-    });
-    // Store without mock
-    expect(store).toHaveProperty('book');
+  it('Should throw an error', () => {
+    expect(createStore).toThrowError(
+      "No object found in 'createStore' parameter."
+    );
   });
   it('Should create a store with multiple storeDB', () => {
     const store = createStore({
