@@ -31,7 +31,7 @@
     "testEnvironment": "node",
     "verbose": true,
     "bail": true,
-    "testMatch": ["test/*.test.js?(x)"],
+    "testMatch": ["**/*.test.js?(x)"],
     "testPathIgnorePatterns": ["node_modules/"],
     "collectCoverageFrom": ["lib/*.js", "!lib/index.js"],
     "coverageThreshold": {
