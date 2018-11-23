@@ -44,4 +44,27 @@ describe('createStore', () => {
     expect(store).toHaveProperty('user');
     expect(store).toHaveProperty('message');
   });
+  it('Should extends resolvers', () => {
+    const store = createStore({
+      book: {
+        data: [
+          { author: 'Speaking JavaScript', title: 'Dr. Axel Raushmayer' },
+          { author: 'Effective JavaScript', title: 'David Herman' },
+          { author: 'Eloquent Javascript', title: 'Marijin Haverbeke' },
+          { author: 'You-Dont-Know-JS', title: 'Kyle Simpson' }
+        ],
+        constructor: function Book({ author, title }) {
+          this.author = author;
+          this.title = title;
+        },
+        resolvers: {
+          getById: function(uid) {
+            return this.db.find(item => item.uid === uid);
+          }
+        }
+      }
+    });
+
+    expect(store.book).toHaveProperty('getById');
+  });
 });

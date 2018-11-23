@@ -1,7 +1,7 @@
 {
   "name": "fakestorejs",
-  "version": "0.0.2",
-  "description": "FakeStoreJs is a javascript library, quickly create a CRUD acess to any object",
+  "version": "0.0.3",
+  "description": "FakeStoreJs make mocking easy, quickly create a CRUD acess to any object",
   "main": "index.js",
   "repository": {
     "type": "git",
