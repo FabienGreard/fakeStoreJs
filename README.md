@@ -1,4 +1,4 @@
-# fakeStoreJs :construction: [![Build Status](https://travis-ci.org/FabienGreard/fakeStoreJs.svg?branch=master)](https://travis-ci.org/FabienGreard/fakeStoreJs)[![dependencies Status](https://david-dm.org/FabienGreard/fakeStoreJs/status.svg)](https://david-dm.org/FabienGreard/fakeStoreJs)[![devDependencies Status](https://david-dm.org/FabienGreard/fakeStoreJs/dev-status.svg)](https://david-dm.org/FabienGreard/fakeStoreJs?type=dev)[![install size](https://packagephobia.now.sh/badge?p=fakestorejs)](https://packagephobia.now.sh/result?p=fakestorejs)
+# fakeStoreJs :construction: [![Build Status](https://travis-ci.org/FabienGreard/fakeStoreJs.svg?branch=master)](https://travis-ci.org/FabienGreard/fakeStoreJs)[![install size](https://packagephobia.now.sh/badge?p=fakestorejs)](https://packagephobia.now.sh/result?p=fakestorejs)
 
 FakeStoreJs make mocking easy, quickly create a CRUD acess to any object
 
