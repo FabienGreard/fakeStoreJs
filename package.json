@@ -1,8 +1,10 @@
 {
   "name": "fakestorejs",
-  "version": "0.0.3",
+  "version": "0.1.1",
   "description": "FakeStoreJs make mocking easy, quickly create a CRUD acess to any object",
   "main": "index.js",
+  "author": "FabienGreard",
+  "license": "MIT",
   "repository": {
     "type": "git",
     "url": "https://github.com/FabienGreard/fakeStoreJs.git"

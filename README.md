@@ -1,11 +1,11 @@
-# fakeStoreJs :construction: [![Build Status](https://travis-ci.org/FabienGreard/fakeStoreJs.svg?branch=master)](https://travis-ci.org/FabienGreard/fakeStoreJs)[![dependencies Status](https://david-dm.org/FabienGreard/fakeStoreJs/status.svg)](https://david-dm.org/FabienGreard/fakeStoreJs)[![devDependencies Status](https://david-dm.org/FabienGreard/fakeStoreJs/dev-status.svg)](https://david-dm.org/FabienGreard/fakeStoreJs?type=dev)
+# fakeStoreJs :construction: [![Build Status](https://travis-ci.org/FabienGreard/fakeStoreJs.svg?branch=master)](https://travis-ci.org/FabienGreard/fakeStoreJs)[![install size](https://packagephobia.now.sh/badge?p=fakestorejs)](https://packagephobia.now.sh/result?p=fakestorejs)
 
 FakeStoreJs make mocking easy, quickly create a CRUD acess to any object
 
-Create multiple store less than a heartbeat ! :hearts:
-Auto implements a unique id on mocked data ! :free:
-Extends CRUD method using resolvers ! :unlock:
-Easy to use ! 🔥
+- Create multiple store less than a heartbeat ! :hearts:
+- Auto implements a unique id on mocked data ! :free:
+- Extends CRUD method using resolvers ! :unlock:
+- Easy to use ! 🔥
 
 If something doesn’t work, please [file an issue](https://github.com/FabienGreard/fakeStoreJs/issues/new) :bug:.
 
@@ -22,7 +22,7 @@ $ npm install fakestorejs or yarn install fakestorejs
 Start importing `createStore` from fakeStoreJs.
 
 ```javascript
-const createStore = require('fakeStoreJs');
+const createStore = require('fakestorejs');
 ```
 
 Create a store from any object.
