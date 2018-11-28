@@ -67,4 +67,25 @@ describe('createStore', () => {
 
     expect(store.book).toHaveProperty('getById');
   });
+  it('Should add options', () => {
+    const store = createStore({
+      book: {
+        data: [
+          { author: 'Speaking JavaScript', title: 'Dr. Axel Raushmayer' },
+          { author: 'Effective JavaScript', title: 'David Herman' },
+          { author: 'Eloquent Javascript', title: 'Marijin Haverbeke' },
+          { author: 'You-Dont-Know-JS', title: 'Kyle Simpson' }
+        ],
+        constructor: function Book({ author, title }) {
+          this.author = author;
+          this.title = title;
+        },
+        options: {
+          idLabel: 'id'
+        }
+      }
+    });
+
+    expect(store.book.get().data[0]).toHaveProperty('id');
+  });
 });

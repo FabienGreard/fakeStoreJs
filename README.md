@@ -1,6 +1,6 @@
 # fakeStoreJs :construction: [![Build Status](https://travis-ci.org/FabienGreard/fakeStoreJs.svg?branch=master)](https://travis-ci.org/FabienGreard/fakeStoreJs)[![install size](https://packagephobia.now.sh/badge?p=fakestorejs)](https://packagephobia.now.sh/result?p=fakestorejs)
 
-FakeStoreJs make mocking easy, quickly create a CRUD acess to any object
+akeStoreJs make mocking easy, quickly create a CRUD access to any object
 
 - Create multiple store less than a heartbeat ! :hearts:
 - Auto implements a unique id on mocked data ! :free:
@@ -54,8 +54,8 @@ store.book.get(); // { sucess: true, data: [ { uid: "000000" author: "Speaking J
 
 ### Requirements
 
-fakeStoreJs when trying to create a fake store need an object with at least on key.
-Each key must provide an array of data and a constructor, look at the example below.
+fakeStoreJs need an object with at least on key.
+Each key represent a collection name (or table name) and they must provide an array of data and a constructor, look at the example below.
 
 ```javascript
 {
@@ -88,7 +88,7 @@ const store = createStore({
 
 ### Methods
 
-fakeStoreJs comes with embeded crud like method :
+fakeStoreJs comes with embedded crud like method :
 However you can override them and or create new one using [resolvers](https://github.com/FabienGreard/fakeStoreJs#Resolvers) !
 
 | Method   | Parameters          | sucess                            | error                              |
@@ -98,11 +98,42 @@ However you can override them and or create new one using [resolvers](https://gi
 | put()    | uid: String, Object | { sucess: Boolean, data: Object } | { sucess: Boolean, error: String } |
 | delete() | uid: String         | { sucess: Boolean}                | { sucess: Boolean, error: String } |
 
-FakeStoreJs will add an uid for each items.
+FakeStoreJs will add a unique identifier(uid) for each item.
 
 #### Resolvers
 
-Resolvers allow to add custom methods by adding a key inside your object call `resolvers` :
+Resolvers allow custom methods by adding a key inside your object call `resolvers` :
+
+```javascript
+const store = createStore({
+  book: {
+    data: [
+      { author: 'Speaking JavaScript', title: 'Dr. Axel Raushmayer' },
+      { author: 'Effective JavaScript', title: 'David Herman' },
+      { author: 'Eloquent Javascript', title: 'Marijin Haverbeke' },
+      { author: 'You-Dont-Know-JS', title: 'Kyle Simpson' }
+    ],
+    resolvers: {
+      // Add your own methods !!
+      getById: function(uid) {
+        const item = this.db.find(item => item.uid === uid);
+        return item
+          ? { sucess: true, data: item }
+          : { sucess: false, error: 'couldnt match the uid' };
+      }
+    }
+  }
+});
+```
+
+fakeStoreJs bind the resolvers with a neat context : `{ db: Array, cst: constructor }` where :
+
+- `db` is the data from your store.
+- `cst` is your constructor from the `createStore()`.
+
+### Options
+
+It is possible to add options to fakeStoreJs using the key : `options` :
 
 ```javascript
 const store = createStore({
@@ -117,20 +148,16 @@ const store = createStore({
       this.author = author;
       this.title = title;
     },
-    resolvers: {
-      // Add your own methods !!
-      getById: function(uid) {
-        return this.db.find(item => item.uid === uid);
-      }
+    options: {
+      idLabel: 'id'
     }
   }
 });
 ```
 
-fakeStoreJs bind the resolvers with a neat context : `{ db: Array, cst: constructor }` where :
-
-- `db` is the data from your store.
-- `cst` is your constructor from the `createStore()`.
+| Method  | Type   | informations                                  |
+| ------- | ------ | --------------------------------------------- |
+| idLabel | String | Use as 'key name' for the generate identifier |
 
 ## Contributing
 
