@@ -22,7 +22,7 @@ $ npm install fakestorejs or yarn install fakestorejs
 Start importing `createStore` from fakeStoreJs.
 
 ```javascript
-const createStore = require('fakeStoreJs');
+const createStore = require('fakestorejs');
 ```
 
 Create a store from any object.
