@@ -43,7 +43,8 @@ const store = createStore({
 :tada: Start using it :tada:
 
 ```javascript
-store.book.get(); // { sucess: true, data: [ { uid: "000000" author: "Speaking JavaScript", title: "Dr. Axel Raushmayer" }, ...] }
+store.book.get();
+// { sucess: true, data: [ { uid: "000000" author: "Speaking JavaScript", title: "Dr. Axel Raushmayer" }, ...] }
 ```
 
 ## Usage
@@ -58,7 +59,7 @@ const store = createStore({
   dragon: {
     data: [], // can be empty or fill with any object
     schema: function Dragon() {}, // deprecated use of anonymous function
-    options: { useSchema: true } // must be specified or it will create a schema from the data given see next example (schemaless)
+    options: { useSchema: true } // Must be specified or it will create a schema from the data given see next example (schemaless)
   }
 });
 ```
@@ -66,7 +67,7 @@ const store = createStore({
 ```javascript
 const store = createStore({
   dragon: {
-    data: [{ name: 'Frizzly', type: 'Ice' }] // must have at least one object
+    data: [{ name: 'Frizzly', type: 'Ice' }] // Must have at least one object
   }
 });
 ```
@@ -86,7 +87,7 @@ const store = createStore({
     schema: function User({ firstname, lastname }) {
       this.firstname = firstname;
       this.lastname = lastname;
-      this.username = `${firstname[0]}.${${lastname}}` // Usualy schema are used to create 'calculated' properties otherwise uset fakeStoreJs schemaless strategy
+      this.username = `${firstname[0]}.${${lastname}}` // Usualy schema are used to create 'calculated' properties otherwise use fakeStoreJs schemaless strategy
     },
     options: {
       useSchema: true
@@ -102,7 +103,7 @@ Most of the time when mocking data you don't need complexity properties like in 
 ```javascript
 const store = createStore({
   user: {
-    data: [{ firstname: 'David', lastname: 'Herman' }] // fakeStoreJs will automacly create a schema that take every key from your first object inside your data
+    data: [{ firstname: 'David', lastname: 'Herman' }] // fakeStoreJs will automatically create a schema that take every key from your first object inside your data array
   }
 });
 ```
