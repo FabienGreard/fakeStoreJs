@@ -54,21 +54,21 @@ fakeStoreJs need an object with at least on key.
 Each key represent a collection name (or table name) and they must provide an array of data or a schema, look at the example below.
 
 ```javascript
-{
+const store = createStore({
   dragon: {
     data: [], // can be empty or fill with any object
     schema: function Dragon() {}, // deprecated use of anonymous function
-    options: { useSchema: true } // must be specified or it will create a schema from the data given see [Schemaless](https://github.com/FabienGreard/fakeStoreJs#Schemaless strategy)
+    options: { useSchema: true } // must be specified or it will create a schema from the data given see next example (schemaless)
   }
-}
+});
 ```
 
 ```javascript
-{
+const store = createStore({
   dragon: {
-    data: [{name: 'Frizzly', type: 'Ice' }], // must have at least one object
+    data: [{ name: 'Frizzly', type: 'Ice' }] // must have at least one object
   }
-}
+});
 ```
 
 Let's now have a deeper look at what are schema.
@@ -112,12 +112,12 @@ const store = createStore({
 fakeStoreJs comes with embedded crud like method :
 However you can override them and or create new one using [resolvers](https://github.com/FabienGreard/fakeStoreJs#Resolvers) !
 
-| Method   | Parameters          | sucess                            | error                              |
-| -------- | ------------------- | --------------------------------- | ---------------------------------- |
-| post()   | Object              | { sucess: Boolean, data: Object } | { sucess: Boolean, error: String } |
-| get()    |                     | { sucess: Boolean, data: Object } |                                    |
-| put()    | uid: String, Object | { sucess: Boolean, data: Object } | { sucess: Boolean, error: String } |
-| delete() | uid: String         | { sucess: Boolean}                | { sucess: Boolean, error: String } |
+| Method   | Parameters               | sucess                            | error                              |
+| -------- | ------------------------ | --------------------------------- | ---------------------------------- |
+| post()   | obj: Object              | { sucess: Boolean, data: Object } | { sucess: Boolean, error: String } |
+| get()    | None                     | { sucess: Boolean, data: Object } | { sucess: Boolean, error: String } |
+| put()    | uid: String, obj: Object | { sucess: Boolean, data: Object } | { sucess: Boolean, error: String } |
+| delete() | uid: String              | { sucess: Boolean}                | { sucess: Boolean, error: String } |
 
 FakeStoreJs will add a unique identifier(uid) for each item.
 
