@@ -1,8 +1,9 @@
 {
   "name": "fakestorejs",
-  "version": "0.2.1",
+  "version": "0.2.3",
   "description": "FakeStoreJs make mocking easy, quickly create a CRUD acess to any object",
   "main": "dist/index.js",
+  "files": ["dist"],
   "author": "FabienGreard",
   "license": "MIT",
   "repository": {
@@ -17,8 +18,7 @@
     "test": "jest",
     "coverage": "jest --coverage --watchAll",
     "prettier": "prettier --single-quote --write **/*.{js,json,css,md}",
-    "prepublish": "npm test && npm run build",
-    "publish": "npm publish ./"
+    "prepublish": "npm test && npm run build"
   },
   "prettier": {
     "printWidth": 80,
@@ -55,7 +55,7 @@
   "dependencies": {},
   "devDependencies": {
     "@zeit/ncc": "^0.1.16",
-    "husk": "0.5.3",
+    "husky": "1.2.0",
     "jest": "23.6.0",
     "nodemon": "1.18.6",
     "prettier": "1.15.2"
