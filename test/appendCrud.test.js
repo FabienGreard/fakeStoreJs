@@ -1,7 +1,7 @@
 const { appendCrud } = require('../lib');
 
 describe('appendCrud', () => {
-  const cst = function({ name, race }) {
+  const schema = function({ name, race }) {
     this.name = name;
     this.race = race;
     this.genUid = function(uid) {
@@ -9,7 +9,7 @@ describe('appendCrud', () => {
     };
   };
   it('Should append crud method to an object', () => {
-    const crud = appendCrud({}, [], cst);
+    const crud = appendCrud({}, [], schema);
     // Post
     expect(crud).toHaveProperty('post');
     // get
@@ -20,7 +20,7 @@ describe('appendCrud', () => {
     expect(crud).toHaveProperty('delete');
   });
   it('Should create a dog object', () => {
-    const crud = appendCrud({}, [], cst);
+    const crud = appendCrud({}, [], schema);
     // post
     expect(
       crud.post({
@@ -52,7 +52,7 @@ describe('appendCrud', () => {
           race: 'Dobermann'
         }
       ],
-      cst
+      schema
     );
     // get
     expect(crud.get().data[0]).toEqual({
@@ -75,7 +75,7 @@ describe('appendCrud', () => {
           uid: '1'
         }
       ],
-      cst
+      schema
     );
     // put
     expect(crud.put('1', { race: 'Boxer' }).data).toEqual({
@@ -94,7 +94,7 @@ describe('appendCrud', () => {
           uid: '0'
         }
       ],
-      cst
+      schema
     );
     // put with error
     expect(crud.put('1', { race: 'Boxer' }).sucess).toBe(false);
@@ -109,7 +109,7 @@ describe('appendCrud', () => {
           uid: '0'
         }
       ],
-      cst
+      schema
     );
     // delete
     expect(crud.delete('0').sucess).toBe(true);
@@ -124,7 +124,7 @@ describe('appendCrud', () => {
           uid: '0'
         }
       ],
-      cst
+      schema
     );
     // delete with error
     expect(crud.delete('1').sucess).toBe(false);

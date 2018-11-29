@@ -1,7 +1,7 @@
 const { createStore } = require('../lib');
 
 describe('createStore', () => {
-  it('Should create a store', () => {
+  it('Should create a store with schema', () => {
     const store = createStore({
       book: {
         data: [
@@ -10,9 +10,41 @@ describe('createStore', () => {
           { author: 'Eloquent Javascript', title: 'Marijin Haverbeke' },
           { author: 'You-Dont-Know-JS', title: 'Kyle Simpson' }
         ],
-        constructor: function Book({ author, title }) {
+        schema: function Book({ author, title }) {
           this.author = author;
           this.title = title;
+        },
+        options: {
+          useSchema: true
+        }
+      }
+    });
+    // Store with mock
+    expect(store).toHaveProperty('book');
+  });
+  it('Should create a store without schema', () => {
+    const store = createStore({
+      book: {
+        data: [
+          { author: 'Speaking JavaScript', title: 'Dr. Axel Raushmayer' },
+          { author: 'Effective JavaScript', title: 'David Herman' },
+          { author: 'Eloquent Javascript', title: 'Marijin Haverbeke' },
+          { author: 'You-Dont-Know-JS', title: 'Kyle Simpson' }
+        ]
+      }
+    });
+    // Store with mock
+    expect(store).toHaveProperty('book');
+  });
+  it('Should create a store without data', () => {
+    const store = createStore({
+      book: {
+        schema: function Book({ author, title }) {
+          this.author = author;
+          this.title = title;
+        },
+        options: {
+          useSchema: true
         }
       }
     });
@@ -23,20 +55,49 @@ describe('createStore', () => {
     expect(createStore).toThrowError(
       "No object found in 'createStore' parameter."
     );
+
+    expect(() =>
+      createStore({
+        book: {
+          data: []
+        }
+      })
+    ).toThrowError(
+      'Require at least one object inside the data key, with useSchema option at false.'
+    );
+
+    expect(() =>
+      createStore({
+        book: {
+          data: [],
+          options: {
+            useSchema: true
+          }
+        }
+      })
+    ).toThrowError(
+      'A schema must be spcecified with useSchema option at true.'
+    );
   });
   it('Should create a store with multiple storeDB', () => {
     const store = createStore({
       user: {
         data: [],
-        constructor: function user({ name }) {
+        schema: function user({ name }) {
           this.name = name;
+        },
+        options: {
+          useSchema: true
         }
       },
       message: {
         data: [],
-        constructor: function message({ title, content }) {
+        schema: function message({ title, content }) {
           this.title = title;
           this.content = content;
+        },
+        options: {
+          useSchema: true
         }
       }
     });

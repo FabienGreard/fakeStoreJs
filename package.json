@@ -1,6 +1,6 @@
 {
   "name": "fakestorejs",
-  "version": "0.1.2",
+  "version": "0.2.0",
   "description": "FakeStoreJs make mocking easy, quickly create a CRUD acess to any object",
   "main": "index.js",
   "author": "FabienGreard",

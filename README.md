@@ -1,6 +1,6 @@
 # fakeStoreJs :construction: [![Build Status](https://travis-ci.org/FabienGreard/fakeStoreJs.svg?branch=master)](https://travis-ci.org/FabienGreard/fakeStoreJs)[![install size](https://packagephobia.now.sh/badge?p=fakestorejs)](https://packagephobia.now.sh/result?p=fakestorejs)
 
-akeStoreJs make mocking easy, quickly create a CRUD access to any object
+fakeStoreJs make mocking easy, quickly create a CRUD access to any object
 
 - Create multiple store less than a heartbeat ! :hearts:
 - Auto implements a unique id on mocked data ! :free:
@@ -35,11 +35,7 @@ const store = createStore({
       { author: 'Effective JavaScript', title: 'David Herman' },
       { author: 'Eloquent Javascript', title: 'Marijin Haverbeke' },
       { author: 'You-Dont-Know-JS', title: 'Kyle Simpson' }
-    ],
-    constructor: function Book({ author, title }) {
-      this.author = author;
-      this.title = title;
-    }
+    ]
   }
 });
 ```
@@ -55,33 +51,58 @@ store.book.get(); // { sucess: true, data: [ { uid: "000000" author: "Speaking J
 ### Requirements
 
 fakeStoreJs need an object with at least on key.
-Each key represent a collection name (or table name) and they must provide an array of data and a constructor, look at the example below.
+Each key represent a collection name (or table name) and they must provide an array of data or a schema, look at the example below.
 
 ```javascript
 {
-  Dragons: {
+  dragon: {
     data: [], // can be empty or fill with any object
-    constructor: function Dragon() {} // deprecated use of anonymous function
+    schema: function Dragon() {}, // deprecated use of anonymous function
+    options: { useSchema: true } // must be specified or it will create a schema from the data given see [Schemaless](https://github.com/FabienGreard/fakeStoreJs#Schemaless strategy)
   }
 }
 ```
 
-Let's now have a deeper look at what are constructor.
+```javascript
+{
+  dragon: {
+    data: [{name: 'Frizzly', type: 'Ice' }], // must have at least one object
+  }
+}
+```
 
-### Constructor
+Let's now have a deeper look at what are schema.
 
-A constructor is the schema used by fakestorejs to create new object.
+### Schema
 
-Example : You want to create a store of users, each user should have a firstname and a lastname, you need to specified it :
+A schema is the 'constructor' used by fakestorejs to create new object.
+
+Example : You want to create a store of users, each user should have a username build from its lastname and firstname, you need to specified it :
 
 ```javascript
 const store = createStore({
   user: {
     data: [],
-    constructor: function User({ firstname, lastname }) {
+    schema: function User({ firstname, lastname }) {
       this.firstname = firstname;
       this.lastname = lastname;
+      this.username = `${firstname[0]}.${${lastname}}` // Usualy schema are used to create 'calculated' properties otherwise uset fakeStoreJs schemaless strategy
+    },
+    options: {
+      useSchema: true
     }
+  }
+});
+```
+
+### Schemaless strategy
+
+Most of the time when mocking data you don't need complexity properties like in the schema model, this is the schemaless fakeStoreJs strategy.
+
+```javascript
+const store = createStore({
+  user: {
+    data: [{ firstname: 'David', lastname: 'Herman' }] // fakeStoreJs will automacly create a schema that take every key from your first object inside your data
   }
 });
 ```
@@ -116,6 +137,7 @@ const store = createStore({
     resolvers: {
       // Add your own methods !!
       getById: function(uid) {
+        // do not use arrow function
         const item = this.db.find(item => item.uid === uid);
         return item
           ? { sucess: true, data: item }
@@ -126,10 +148,14 @@ const store = createStore({
 });
 ```
 
-fakeStoreJs bind the resolvers with a neat context : `{ db: Array, cst: constructor }` where :
+fakeStoreJs bind the resolvers with a neat context : `{ db: Array, cst: Function }` where :
 
 - `db` is the data from your store.
-- `cst` is your constructor from the `createStore()`.
+- `cst` is your schema from the `createStore()`.
+
+Nb: `cst` will always be your database name capitalized.
+
+example: `book` cst will be `Book`
 
 ### Options
 
@@ -144,20 +170,22 @@ const store = createStore({
       { author: 'Eloquent Javascript', title: 'Marijin Haverbeke' },
       { author: 'You-Dont-Know-JS', title: 'Kyle Simpson' }
     ],
-    constructor: function Book({ author, title }) {
+    schema: function Book({ author, title }) {
       this.author = author;
       this.title = title;
     },
     options: {
-      idLabel: 'id'
+      idLabel: 'id',
+      useSchema: true
     }
   }
 });
 ```
 
-| Method  | Type   | informations                                  |
-| ------- | ------ | --------------------------------------------- |
-| idLabel | String | Use as 'key name' for the generate identifier |
+| Method    | Type    | informations                                                   | DEfault |
+| --------- | ------- | -------------------------------------------------------------- | ------- |
+| idLabel   | String  | Use as 'key name' for the generate identifier                  | 'uid'   |
+| useSchema | Boolean | Switch beetween embedded schema constructor or your own schema | false   |
 
 ## Contributing
 
