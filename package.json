@@ -54,11 +54,11 @@
   },
   "dependencies": {},
   "devDependencies": {
-    "@zeit/ncc": "^0.1.16",
+    "@zeit/ncc": "^0.2.0",
     "jest": "23.6.0",
     "husky": "1.2.0",
-    "nodemon": "1.18.6",
-    "prettier": "1.15.2"
+    "nodemon": "1.18.7",
+    "prettier": "1.15.3"
   },
   "keywords": ["api", "mock", "fake", "store", "javascript"]
 }
