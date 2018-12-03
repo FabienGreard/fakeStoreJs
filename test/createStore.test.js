@@ -5,10 +5,10 @@ describe('createStore', () => {
     const store = createStore({
       book: {
         data: [
-          { author: 'Speaking JavaScript', title: 'Dr. Axel Raushmayer' },
-          { author: 'Effective JavaScript', title: 'David Herman' },
-          { author: 'Eloquent Javascript', title: 'Marijin Haverbeke' },
-          { author: 'You-Dont-Know-JS', title: 'Kyle Simpson' }
+          { title: 'Speaking JavaScript', author: 'Dr. Axel Raushmayer' },
+          { title: 'Effective JavaScript', author: 'David Herman' },
+          { title: 'Eloquent Javascript', author: 'Marijin Haverbeke' },
+          { title: 'You-Dont-Know-JS', author: 'Kyle Simpson' }
         ],
         schema: function Book({ author, title }) {
           this.author = author;
@@ -26,10 +26,10 @@ describe('createStore', () => {
     const store = createStore({
       book: {
         data: [
-          { author: 'Speaking JavaScript', title: 'Dr. Axel Raushmayer' },
-          { author: 'Effective JavaScript', title: 'David Herman' },
-          { author: 'Eloquent Javascript', title: 'Marijin Haverbeke' },
-          { author: 'You-Dont-Know-JS', title: 'Kyle Simpson' }
+          { title: 'Speaking JavaScript', author: 'Dr. Axel Raushmayer' },
+          { title: 'Effective JavaScript', author: 'David Herman' },
+          { title: 'Eloquent Javascript', author: 'Marijin Haverbeke' },
+          { title: 'You-Dont-Know-JS', author: 'Kyle Simpson' }
         ]
       }
     });
@@ -109,10 +109,10 @@ describe('createStore', () => {
     const store = createStore({
       book: {
         data: [
-          { author: 'Speaking JavaScript', title: 'Dr. Axel Raushmayer' },
-          { author: 'Effective JavaScript', title: 'David Herman' },
-          { author: 'Eloquent Javascript', title: 'Marijin Haverbeke' },
-          { author: 'You-Dont-Know-JS', title: 'Kyle Simpson' }
+          { title: 'Speaking JavaScript', author: 'Dr. Axel Raushmayer' },
+          { title: 'Effective JavaScript', author: 'David Herman' },
+          { title: 'Eloquent Javascript', author: 'Marijin Haverbeke' },
+          { title: 'You-Dont-Know-JS', author: 'Kyle Simpson' }
         ],
         constructor: function Book({ author, title }) {
           this.author = author;
@@ -132,10 +132,10 @@ describe('createStore', () => {
     const store = createStore({
       book: {
         data: [
-          { author: 'Speaking JavaScript', title: 'Dr. Axel Raushmayer' },
-          { author: 'Effective JavaScript', title: 'David Herman' },
-          { author: 'Eloquent Javascript', title: 'Marijin Haverbeke' },
-          { author: 'You-Dont-Know-JS', title: 'Kyle Simpson' }
+          { title: 'Speaking JavaScript', author: 'Dr. Axel Raushmayer' },
+          { title: 'Effective JavaScript', author: 'David Herman' },
+          { title: 'Eloquent Javascript', author: 'Marijin Haverbeke' },
+          { title: 'You-Dont-Know-JS', author: 'Kyle Simpson' }
         ],
         constructor: function Book({ author, title }) {
           this.author = author;

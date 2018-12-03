@@ -1,4 +1,4 @@
-# fakeStoreJs :construction: [![Build Status](https://travis-ci.org/FabienGreard/fakeStoreJs.svg?branch=master)](https://travis-ci.org/FabienGreard/fakeStoreJs)[![install size](https://packagephobia.now.sh/badge?p=fakestorejs)](https://packagephobia.now.sh/result?p=fakestorejs)
+# fakeStoreJs :construction: [![Build Status](https://travis-ci.org/FabienGreard/fakeStoreJs.svg?branch=master)](https://travis-ci.org/FabienGreard/fakeStoreJs)[![install size](https://packagephobia.now.sh/badge?p=fakestorejs)](https://packagephobia.now.sh/result?p=fakestorejs)[![Language grade: JavaScript](https://img.shields.io/lgtm/grade/javascript/g/FabienGreard/fakeStoreJs.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/FabienGreard/fakeStoreJs/context:javascript)
 
 fakeStoreJs make mocking easy, quickly create a CRUD access to any object
 
@@ -31,10 +31,10 @@ Create a store from any object.
 const store = createStore({
   book: {
     data: [
-      { author: 'Speaking JavaScript', title: 'Dr. Axel Raushmayer' },
-      { author: 'Effective JavaScript', title: 'David Herman' },
-      { author: 'Eloquent Javascript', title: 'Marijin Haverbeke' },
-      { author: 'You-Dont-Know-JS', title: 'Kyle Simpson' }
+      { title: 'Speaking JavaScript', author: 'Dr. Axel Raushmayer' },
+      { title: 'Effective JavaScript', author: 'David Herman' },
+      { title: 'Eloquent Javascript', author: 'Marijin Haverbeke' },
+      { title: 'You-Dont-Know-JS', author: 'Kyle Simpson' }
     ]
   }
 });
@@ -130,31 +130,45 @@ Resolvers allow custom methods by adding a key inside your object call `resolver
 const store = createStore({
   book: {
     data: [
-      { author: 'Speaking JavaScript', title: 'Dr. Axel Raushmayer' },
-      { author: 'Effective JavaScript', title: 'David Herman' },
-      { author: 'Eloquent Javascript', title: 'Marijin Haverbeke' },
-      { author: 'You-Dont-Know-JS', title: 'Kyle Simpson' }
+      { title: 'Speaking JavaScript', author: 'Dr. Axel Raushmayer' },
+      { title: 'Effective JavaScript', author: 'David Herman' },
+      { title: 'Eloquent Javascript', author: 'Marijin Haverbeke' },
+      { title: 'You-Dont-Know-JS', author: 'Kyle Simpson' }
     ],
     resolvers: {
       // Add your own methods !!
       getById: function(uid) {
         // do not use arrow function
-        const item = this.db.find(item => item.uid === uid);
+        const item = this.collection.find(item => item.uid === uid);
         return item
           ? { sucess: true, data: item }
           : { sucess: false, error: 'couldnt match the uid' };
+      },
+      multiplePost: function(arrayOfObj) {
+        let error = false;
+        for (let [i, obj] of arrayOfObj.entries()) {
+          try {
+            obj = this.Book(obj); // use of the schema context, 'collection': book with 'schema': Book
+            this.collection = [...this.collection, obj];
+          } catch (e) {
+            error = { sucess: false, error: e };
+            break;
+          }
+          arrayOfObj[i] = obj;
+        }
+        return error ? error : { sucess: true, data: arrayOfObj };
       }
     }
   }
 });
 ```
 
-fakeStoreJs bind the resolvers with a neat context : `{ db: Array, cst: Function }` where :
+fakeStoreJs bind the resolvers with a neat context : `{ collection: Array, schema: Function }` where :
 
-- `db` is the data from your store.
-- `cst` is your schema from the `createStore()`.
+- `collection` is the table from your store(database).
+- `schema` is your schema from the `createStore()`.
 
-Nb: `cst` will always be your database name capitalized.
+Nb: `schema` will always be your collection name capitalized.
 
 example: `book` cst will be `Book`
 
@@ -166,10 +180,10 @@ It is possible to add options to fakeStoreJs using the key : `options` :
 const store = createStore({
   book: {
     data: [
-      { author: 'Speaking JavaScript', title: 'Dr. Axel Raushmayer' },
-      { author: 'Effective JavaScript', title: 'David Herman' },
-      { author: 'Eloquent Javascript', title: 'Marijin Haverbeke' },
-      { author: 'You-Dont-Know-JS', title: 'Kyle Simpson' }
+      { title: 'Speaking JavaScript', author: 'Dr. Axel Raushmayer' },
+      { title: 'Effective JavaScript', author: 'David Herman' },
+      { title: 'Eloquent Javascript', author: 'Marijin Haverbeke' },
+      { title: 'You-Dont-Know-JS', author: 'Kyle Simpson' }
     ],
     schema: function Book({ author, title }) {
       this.author = author;

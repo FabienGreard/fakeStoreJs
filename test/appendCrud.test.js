@@ -1,132 +1,60 @@
 const { appendCrud } = require('../lib');
 
 describe('appendCrud', () => {
-  const schema = function({ name, race }) {
-    this.name = name;
-    this.race = race;
-    this.genUid = function(uid) {
-      this.uid = uid;
-    };
+  const collectionWithCrud = {
+    schema: function(obj) {
+      if (typeof obj !== 'object') throw new Error('is not an object');
+      return { ...obj, uid: String(this.collection.length) };
+    },
+    collection: [
+      { uid: '0', title: 'Speaking JavaScript', author: 'Dr. Axel Raushmayer' },
+      { uid: '1', title: 'Effective JavaScript', author: 'David Herman' },
+      { uid: '2', title: 'Eloquent Javascript', author: 'Marijin Haverbeke' },
+      { uid: '3', title: 'You-Dont-Know-JS', author: 'Kyle Simpson' }
+    ],
+    ...appendCrud('schema')
   };
   it('Should append crud method to an object', () => {
-    const crud = appendCrud({}, [], schema);
-    // Post
+    const crud = appendCrud({});
     expect(crud).toHaveProperty('post');
-    // get
     expect(crud).toHaveProperty('get');
-    // Put
     expect(crud).toHaveProperty('put');
-    // Delete
     expect(crud).toHaveProperty('delete');
   });
-  it('Should create a dog object', () => {
-    const crud = appendCrud({}, [], schema);
-    // post
+  it('Should post an object', () => {
     expect(
-      crud.post({
-        name: 'fluffy',
-        race: 'Dobermann'
+      collectionWithCrud.post({
+        title: 'You-Dont-Know-JS',
+        author: 'Kyle Simpson'
       }).data
-    ).toEqual({
-      name: 'fluffy',
-      race: 'Dobermann',
-      uid: 0
-    });
+    ).toEqual({ uid: '4', title: 'You-Dont-Know-JS', author: 'Kyle Simpson' });
   });
-  it('Should create a dog object with error', () => {
-    const crud = appendCrud({}, [], jest.fn());
-    // post
+  it('Should post an object (throw error)', () => {
+    expect(collectionWithCrud.post('super').error.message).toEqual(
+      'is not an object'
+    );
+  });
+  it('Should get a list of object', () => {
+    expect(collectionWithCrud.get().data).toEqual(
+      collectionWithCrud.collection
+    );
+  });
+  it('Should update an object', () => {
     expect(
-      crud.post({
-        name: 'fluffy',
-        race: 'Dobermann'
-      }).sucess
-    ).toBe(false);
+      collectionWithCrud.put('1', { title: 'updated' }).data.title
+    ).toEqual('updated');
   });
-  it('Should get a dog object', () => {
-    const crud = appendCrud(
-      {},
-      [
-        {
-          name: 'fluffy',
-          race: 'Dobermann'
-        }
-      ],
-      schema
+  it('Should update an object (couldnt match the uid)', () => {
+    expect(collectionWithCrud.put('10', { title: 'updated' }).error).toEqual(
+      'couldnt match the uid'
     );
-    // get
-    expect(crud.get().data[0]).toEqual({
-      name: 'fluffy',
-      race: 'Dobermann'
-    });
   });
-  it('Should update a dog object', () => {
-    const crud = appendCrud(
-      {},
-      [
-        {
-          name: 'Grumpy',
-          race: 'Cat',
-          uid: '0'
-        },
-        {
-          name: 'fluffy',
-          race: 'Dobermann',
-          uid: '1'
-        }
-      ],
-      schema
-    );
-    // put
-    expect(crud.put('1', { race: 'Boxer' }).data).toEqual({
-      name: 'fluffy',
-      race: 'Boxer',
-      uid: '1'
-    });
+  it('Should delete an object (couldnt match the uid)', () => {
+    expect(collectionWithCrud.delete('1').sucess).toEqual(true);
   });
-  it('Should update a dog object with error', () => {
-    const crud = appendCrud(
-      {},
-      [
-        {
-          name: 'fluffy',
-          race: 'Dobermann',
-          uid: '0'
-        }
-      ],
-      schema
+  it('Should update an object (couldnt match the uid)', () => {
+    expect(collectionWithCrud.delete('10').error).toEqual(
+      'couldnt match the uid'
     );
-    // put with error
-    expect(crud.put('1', { race: 'Boxer' }).sucess).toBe(false);
-  });
-  it('Should delete a dog object', () => {
-    const crud = appendCrud(
-      {},
-      [
-        {
-          name: 'fluffy',
-          race: 'Dobermann',
-          uid: '0'
-        }
-      ],
-      schema
-    );
-    // delete
-    expect(crud.delete('0').sucess).toBe(true);
-  });
-  it('Should delete a dog object with error', () => {
-    const crud = appendCrud(
-      {},
-      [
-        {
-          name: 'fluffy',
-          race: 'Dobermann',
-          uid: '0'
-        }
-      ],
-      schema
-    );
-    // delete with error
-    expect(crud.delete('1').sucess).toBe(false);
   });
 });
