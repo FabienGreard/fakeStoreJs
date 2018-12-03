@@ -14,7 +14,7 @@
   "scripts": {
     "start": "node index.js",
     "dev": "nodemon index.js",
-    "build": "ncc build index.js",
+    "build": "ncc build index.js -S",
     "test": "jest",
     "coverage": "jest --coverage --watchAll",
     "prettier": "prettier --single-quote --write **/*.{js,json,css,md}",
