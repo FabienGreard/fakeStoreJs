@@ -1,6 +1,6 @@
 {
   "name": "fakestorejs",
-  "version": "0.3.1",
+  "version": "0.3.4",
   "description": "FakeStoreJs make mocking easy, quickly create a CRUD acess to any object",
   "main": "dist/index.js",
   "files": ["dist"],
@@ -54,7 +54,7 @@
   },
   "dependencies": {},
   "devDependencies": {
-    "@zeit/ncc": "^0.2.0",
+    "@zeit/ncc": "0.5.3",
     "jest": "23.6.0",
     "husky": "1.2.0",
     "nodemon": "1.18.7",
