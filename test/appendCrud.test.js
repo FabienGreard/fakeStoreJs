@@ -49,10 +49,10 @@ describe('appendCrud', () => {
       'couldnt match the uid'
     );
   });
-  it('Should delete an object (couldnt match the uid)', () => {
-    expect(collectionWithCrud.delete('1').sucess).toEqual(true);
+  it('Should delete an object', () => {
+    expect(collectionWithCrud.delete(1).sucess).toEqual(true);
   });
-  it('Should update an object (couldnt match the uid)', () => {
+  it('Should delete an object (couldnt match the uid)', () => {
     expect(collectionWithCrud.delete('10').error).toEqual(
       'couldnt match the uid'
     );

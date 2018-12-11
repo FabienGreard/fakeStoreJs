@@ -149,4 +149,28 @@ describe('createStore', () => {
 
     expect(store.book.get().data[0]).toHaveProperty('id');
   });
+  it('Should update uid', () => {
+    const store = createStore({
+      book: {
+        data: [
+          { title: 'Speaking JavaScript', author: 'Dr. Axel Raushmayer' },
+          { title: 'Effective JavaScript', author: 'David Herman' },
+          { title: 'Eloquent Javascript', author: 'Marijin Haverbeke' },
+          { title: 'You-Dont-Know-JS', author: 'Kyle Simpson' }
+        ]
+      }
+    });
+
+    store.book.delete('000001');
+    expect(
+      store.book.post({
+        title: 'You-Dont-Know-JS',
+        author: 'Kyle Simpson'
+      }).data
+    ).toEqual({
+      uid: '000001',
+      title: 'You-Dont-Know-JS',
+      author: 'Kyle Simpson'
+    });
+  });
 });
