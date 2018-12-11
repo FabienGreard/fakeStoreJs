@@ -11,3 +11,6 @@ coverage
 
 # Build
 dist
+
+# Persistent db 
+db

@@ -3,8 +3,9 @@
 fakeStoreJs make mocking easy, quickly create a CRUD access to any object
 
 - Create multiple store in less than a heartbeat ! :hearts:
-- Come with a unique id attribution ! :free:
+- Come with a unique id attribution ! :boom:
 - Extends CRUD method using resolvers ! :unlock:
+- Persistant data ! :new:
 - Easy to use ! 🔥
 
 If something doesn’t work, please [file an issue](https://github.com/FabienGreard/fakeStoreJs/issues/new) :bug:.
@@ -63,6 +64,8 @@ const store = createStore({
   }
 });
 ```
+
+Or
 
 ```javascript
 const store = createStore({
@@ -197,10 +200,11 @@ const store = createStore({
 });
 ```
 
-| Method    | Type    | informations                                                   | DEfault |
-| --------- | ------- | -------------------------------------------------------------- | ------- |
-| idLabel   | String  | Use as 'key name' for the generate identifier                  | 'uid'   |
-| useSchema | Boolean | Switch beetween embedded schema constructor or your own schema | false   |
+| Method       | Type    | informations                                                   | Default |
+| ------------ | ------- | -------------------------------------------------------------- | ------- |
+| idLabel      | String  | Use as 'key name' for the generate identifier                  | 'uid'   |
+| useSchema    | Boolean | Switch beetween embedded schema constructor or your own schema | false   |
+| isPersistent | Boolean | Allow to save your data after a restart                        | false   |
 
 ## Contributing
 

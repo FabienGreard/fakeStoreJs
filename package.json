@@ -1,6 +1,6 @@
 {
   "name": "fakestorejs",
-  "version": "0.3.4",
+  "version": "0.4.0",
   "description": "FakeStoreJs make mocking easy, quickly create a CRUD acess to any object",
   "main": "dist/index.js",
   "files": ["dist"],
@@ -13,12 +13,11 @@
   "homepage": "https://github.com/FabienGreard/fakeStoreJs",
   "scripts": {
     "start": "node index.js",
-    "dev": "nodemon index.js",
+    "dev": "nodemon index.js --ignore db/",
     "build": "ncc build index.js -S",
     "test": "jest",
     "coverage": "jest --coverage --watchAll",
-    "prettier": "prettier --single-quote --write **/*.{js,json,css,md}",
-    "prepare": "npm test && npm run build"
+    "prettier": "prettier --single-quote --write **/*.{js,json,css,md}"
   },
   "prettier": {
     "printWidth": 80,
