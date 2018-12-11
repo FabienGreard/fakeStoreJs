@@ -5,7 +5,7 @@ fakeStoreJs make mocking easy, quickly create a CRUD access to any object
 - Create multiple store in less than a heartbeat ! :hearts:
 - Come with a unique id attribution ! :boom:
 - Extends CRUD method using resolvers ! :unlock:
-- Persistant data ! :new:
+- Persistent data ! :new:
 - Easy to use ! 🔥
 
 If something doesn’t work, please [file an issue](https://github.com/FabienGreard/fakeStoreJs/issues/new) :bug:.
