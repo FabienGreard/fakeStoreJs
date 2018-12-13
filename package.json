@@ -1,6 +1,6 @@
 {
   "name": "fakestorejs",
-  "version": "0.4.1",
+  "version": "0.4.2",
   "description": "FakeStoreJs make mocking easy, quickly create a CRUD acess to any object",
   "main": "dist/index.js",
   "files": ["dist"],

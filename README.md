@@ -70,7 +70,7 @@ Or
 ```javascript
 const store = createStore({
   dragon: {
-    data: [{ name: 'Frizzly', type: 'Ice' }] // Must have at least one object
+    data: [{ name: 'Frizzly', type: 'Ice' }] // Must have at least one object inside the data field
   }
 });
 ```
@@ -149,6 +149,8 @@ const store = createStore({
       },
       multiplePost: function(arrayOfObj) {
         let error = false;
+        const collectionPreviousState = this.collection;
+
         for (let [i, obj] of arrayOfObj.entries()) {
           try {
             obj = this.Book(obj); // use of the schema context, 'collection': book with 'schema': Book
@@ -159,7 +161,11 @@ const store = createStore({
           }
           arrayOfObj[i] = obj;
         }
-        return error ? error : { sucess: true, data: arrayOfObj };
+
+        if (error) {
+          this.collection = collectionPreviousState;
+          return error;
+        } else return { sucess: true, data: arrayOfObj };
       }
     }
   }
@@ -173,7 +179,7 @@ fakeStoreJs bind the resolvers with a neat context : `{ collection: Array, schem
 
 Nb: `schema` will always be your collection name capitalized.
 
-example: `book` cst will be `Book`
+example: `book` schema will be `Book`
 
 ### Options
 
@@ -204,7 +210,7 @@ const store = createStore({
 | ------------ | ------- | -------------------------------------------------------------- | ------- |
 | idLabel      | String  | Use as 'key name' for the generate identifier                  | 'uid'   |
 | useSchema    | Boolean | Switch beetween embedded schema constructor or your own schema | false   |
-| isPersistent | Boolean | Allow to save your data after a restart                        | false   |
+| isPersistent | Boolean | Keep the data even after a restart                             | false   |
 
 ## Contributing
 
