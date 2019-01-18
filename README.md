@@ -206,11 +206,12 @@ const store = createStore({
 });
 ```
 
-| Method       | Type    | informations                                                   | Default |
-| ------------ | ------- | -------------------------------------------------------------- | ------- |
-| idLabel      | String  | Use as 'key name' for the generate identifier                  | 'uid'   |
-| useSchema    | Boolean | Switch beetween embedded schema constructor or your own schema | false   |
-| isPersistent | Boolean | Keep the data even after a restart                             | false   |
+| Method          | Type    | informations                                                   | Default |
+| --------------- | ------- | -------------------------------------------------------------- | ------- |
+| idLabel         | String  | Use as 'key name' for the generate identifier                  | 'uid'   |
+| useSchema       | Boolean | Switch beetween embedded schema constructor or your own schema | false   |
+| isPersistent    | Boolean | Keep the data even after a restart                             | false   |
+| isDataDeletable | Boolean | Delete the initial data from the data field                    | false   |
 
 ## Contributing
 
