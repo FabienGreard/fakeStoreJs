@@ -1,6 +1,6 @@
 {
   "name": "fakestorejs",
-  "version": "0.4.3",
+  "version": "0.4.4",
   "description": "FakeStoreJs make mocking easy, quickly create a CRUD acess to any object",
   "main": "dist/index.js",
   "files": ["dist"],
@@ -14,7 +14,7 @@
   "scripts": {
     "start": "node index.js",
     "dev": "nodemon index.js --ignore db/",
-    "build": "ncc build index.js -S",
+    "build": "ncc build index.js -m",
     "test": "jest",
     "coverage": "jest --coverage --watchAll",
     "prettier": "prettier --single-quote --write **/*.{js,json,css,md}"
@@ -53,10 +53,10 @@
   },
   "dependencies": {},
   "devDependencies": {
-    "@zeit/ncc": "0.6.0",
+    "@zeit/ncc": "0.9.0",
     "jest": "23.6.0",
-    "husky": "1.2.0",
-    "nodemon": "1.18.7",
+    "husky": "1.3.1",
+    "nodemon": "1.18.9",
     "prettier": "1.15.3"
   },
   "keywords": ["api", "mock", "fake", "store", "javascript"]
